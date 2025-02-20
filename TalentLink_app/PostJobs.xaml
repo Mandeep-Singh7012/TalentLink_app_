@@ -23,7 +23,7 @@
                    HorizontalOptions="Center" 
                    Margin="0,10"/>
 
-      
+          
 
             <!-- Job Title Entry -->
             <Frame CornerRadius="10" Padding="10" BackgroundColor="White">
