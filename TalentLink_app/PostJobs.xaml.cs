@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Maui.Controls;
 using TalentLink_app.Models;
 using TalentLink_app.Services;
@@ -21,6 +21,16 @@ namespace TalentLink_app
             if (string.IsNullOrEmpty(recruiterId))
             {
                 await DisplayAlert("Error", "Authentication required.", "OK");
+                return;
+            }
+
+            // Validate input fields
+            if (string.IsNullOrWhiteSpace(JobTitleEntry.Text) ||
+                string.IsNullOrWhiteSpace(JobDescriptionEditor.Text) ||
+                string.IsNullOrWhiteSpace(PayRateEntry.Text) ||
+                string.IsNullOrWhiteSpace(LocationEntry.Text))
+            {
+                await DisplayAlert("Error", "All fields are required.", "OK");
                 return;
             }
 
