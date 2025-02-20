@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Firebase.Auth;
 using Firebase.Database;
@@ -81,20 +81,24 @@ namespace TalentLink_app.Services
             {
                 var authResult = await _authProvider.SignInWithEmailAndPasswordAsync(email, password);
                 string userId = authResult.User.LocalId;
-                string token = authResult.FirebaseToken; // ✅ Store Firebase Token
+                string token = authResult.FirebaseToken;
 
                 if (!string.IsNullOrEmpty(userId))
                 {
                     Preferences.Set("UserID", userId);
-                    Preferences.Set("UserToken", token); // ✅ Save token
+                    Preferences.Set("UserToken", token);
                     return userId;
                 }
 
                 return null;
             }
+            catch (FirebaseAuthException ex)
+            {
+                throw new Exception($"Error: {ex.Reason}");
+            }
             catch (Exception ex)
             {
-                throw new Exception("Login failed: " + ex.Message);
+                throw new Exception($"Error: {ex.Message}");
             }
         }
 
